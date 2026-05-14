@@ -240,9 +240,9 @@ function renderPack(){
     html+='<div><div class="ptitle">'+sekce.sekce+'</div><div class="pack-bar"><div class="pack-bar-fill" style="width:'+pct+'%"></div></div></div>';
     html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+secTotal+'</span><span class="arrow">▼</span></div>';
     html+='</div><div class="pack-items '+(isOpen?"open":"")+'">';
-    sekce.polozky.forEach(function(p){
-      var pid="pi_"+si+"_"+p.replace(/[^a-z0-9]/gi,"_");
-      html+='<div class="pack-item '+(state[p]?"done":"")+'"><input type="checkbox" id="'+pid+'" '+(state[p]?"checked":"") +' onchange="togglePack(\''+p.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\\',this.checked)"><label for="'+pid+'" class="item-text">'+p+'</label></div>';
+    sekce.polozky.forEach(function(p,pi){
+      var pid="pi_"+si+"_"+pi;
+      html+='<div class="pack-item '+(state[p]?"done":"")+'"><input type="checkbox" id="'+pid+'" '+(state[p]?"checked":"") +' onchange="togglePack('+si+','+pi+',this.checked)"><label for="'+pid+'" class="item-text">'+p+'</label></div>';
     });
     html+='</div></div>';
   });
@@ -250,7 +250,7 @@ function renderPack(){
 }
 
 function toggleSekce(si){var s=loadPackState();s["__open_"+si]=s["__open_"+si]===false?true:false;savePackState(s);renderPack();}
-function togglePack(item,val){var s=loadPackState();s[item]=val;savePackState(s);renderPack();}
+function togglePack(si,pi,val){var list=getPackList();var item=list[si].polozky[pi];var s=loadPackState();s[item]=val;savePackState(s);renderPack();}
 function resetPack(){if(confirm("Resetovat celý seznam balení?")){localStorage.removeItem(getPackKey());renderPack();}}
 
 function fmt(n){return Math.round(n).toLocaleString("cs-CZ")+" Kč";}
