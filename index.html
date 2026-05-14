@@ -193,56 +193,43 @@ var API="https://script.google.com/macros/s/AKfycbyxgEYxH1tVe1unV4UB2lBcNB22AxQV
 var ADMIN_TOKEN="admin2026";
 var currentUser=null,isAdmin=false,localNotifs=[],localTrzby=[];
 
-var PACK_LISTS={
-  "Beertruck":[
-    {sekce:"🍺 Alkohol & nápoje",polozky:["Sudy aperol točený","Sudy prosecco točené","Sudy Kofola","Ginger beer","Sodovka","Tonic","Coca Cola","Cola Zero","Gordon's Gin","Amundsen Vodka","Havana Rum","Becherovka","Poněšice slivovice","Finsbury Gin","Božkov Zelená","Víno červené","Víno bílé (Chardonnay, Primitivo)"]},
-    {sekce:"🍋 Ovoce & garnish",polozky:["Maliny","Pomeranče (na drinky)","Limety","Máta","Okurka (na G&T)"]},
-    {sekce:"🥤 Kelímky & servis",polozky:["Kelímky shots","Kelímky 0,4l nevratné","Kelímky víno 0,2l","Kelímky Kofola 0,5l","Brčka","Ubrousky","Tácky"]},
-    {sekce:"🔧 Vybavení baru",polozky:["Jigger (odměrka)","Třepačka / shaker","Prkénko na krájení","Nůž na ovoce","Otvírák na lahve","Lžíce barová","Nádoby na led (min 3x)","Ledovač / lopatka na led"]},
-    {sekce:"💰 Pokladna",polozky:["Terminál + kabel + nabíječka","Kasa + základ a drobné","Záložní baterie / powerbank"]},
-    {sekce:"🧹 Úklid",polozky:["Pytle na odpadky","Hadry / utěrky","Odpadkové koše"]}
-  ],
-  "TODI":[
-    {sekce:"🧊 Vybavení kuchyně",polozky:["Chladící vany 2x","Mísa na hranolky / velkej kastrol TODI","Fritézy 2x","Gril 2x + bomba + kleště","Ohřívací vana","Špachtle na gril","Pinzeta","Pokličky na maso","Nože","Prkýnka","Gastrošky","Kýbl na vodu / odmytí nádobí"]},
-    {sekce:"🍔 Suroviny – jídlo",polozky:["Hovězí maso","Cheddar – plátky a strouhaný","Rajčata (bedna)","Polníček (2 balení – chlaďák)","Jalapeňo (1 lahev – front line)","Cibule karamelizovaná (min 15 kg – nadělat!)","Housky (300 ks)","Slanina"]},
-    {sekce:"🥫 Omáčky & dipy",polozky:["Majonézy na burger (5 lahví od každé)","Classic omáčka (majolka-kečup-koření)","Sýrový dip","Mayo","Tatarka","Kečup","Baconeise","Chipotle"]},
-    {sekce:"🥤 Nápoje",polozky:["Cola","Cola Zero","Voda"]},
-    {sekce:"📦 Obaly & servis",polozky:["Obaly – krabičky TODI (u dveří)","Papír na balení","Ubrousky","Příbory","Píchatka / párátka","Rukavice","Solničky + pepřenky"]},
-    {sekce:"🔧 Technika & infrastruktura",polozky:["Stůl dřevěný 2x","Stůl plast 2x","Lednice 2x","Světlo","Prodlužováky + buben + gumák","Antoníček","Voda (na provoz)","Stan","Bočnice","Muší křídla"]},
-    {sekce:"👕 Oblečení & hygiena",polozky:["Firemní trička / zástěry","Hadry","Utěrky","Papírové utěrky","Folie průhledná","Pytle do koše"]},
-    {sekce:"💰 Pokladna",polozky:["Kasa + základ a drobné","Terminál + kabel","Sikovky"]}
-  ],
-  "Manažer":[
-    {sekce:"📋 Dokumenty & kontrola",polozky:["Checklist pro každé stanoviště","Seznam brigádníků + telefony","Plán rozmístění stanovišť","Kontakt na dodavatele"]},
-    {sekce:"🔧 Vybavení manažera",polozky:["Nabitý telefon + powerbank","Firemní tričko / identifikace"]},
-    {sekce:"💰 Finance",polozky:["Záložní hotovost","Obálky na tržby","Bloček + pero"]}
-  ]
-};
+var packData=[];
 
-function getPackList(){if(!currentUser)return[];return PACK_LISTS[currentUser.stanoviste]||PACK_LISTS["Manažer"]||[];}
-function getPackKey(){return"pack_"+(currentUser?currentUser.stanoviste:"x");}
+function getPackKey(){return"packstate_"+(currentUser?currentUser.stanoviste:"x");}
 function loadPackState(){try{return JSON.parse(localStorage.getItem(getPackKey())||"{}");}catch(e){return{};}}
 function savePackState(s){localStorage.setItem(getPackKey(),JSON.stringify(s));}
 
+async function loadBaleni(){
+  document.getElementById("pack-container").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
+  var res=await apiGet({action:"getBaleni",token:currentUser.token});
+  if(!res.ok){document.getElementById("pack-container").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
+  packData=res.polozky||[];
+  renderPack();
+}
+
 function renderPack(){
-  var list=getPackList(),state=loadPackState(),total=0,done=0;
-  list.forEach(function(s){s.polozky.forEach(function(p){total++;if(state[p])done++;});});
+  var state=loadPackState();
+  var total=packData.length,done=packData.filter(function(p){return state[p.id];}).length;
   document.getElementById("pack-progress").style.width=(total?Math.round(done/total*100):0)+"%";
   document.getElementById("pack-count").textContent=done+" / "+total+" položek zabaleno";
+
+  // Seskupit dle sekce
+  var sekce={};
+  packData.forEach(function(p){if(!sekce[p.sekce])sekce[p.sekce]=[];sekce[p.sekce].push(p);});
+
   var html="";
-  list.forEach(function(sekce,si){
-    var secDone=sekce.polozky.filter(function(p){return state[p];}).length;
-    var secTotal=sekce.polozky.length;
-    var pct=secTotal?Math.round(secDone/secTotal*100):0;
+  Object.keys(sekce).forEach(function(s,si){
+    var items=sekce[s];
+    var secDone=items.filter(function(p){return state[p.id];}).length;
+    var pct=items.length?Math.round(secDone/items.length*100):0;
     var isOpen=state["__open_"+si]!==false;
     html+='<div class="pack-section">';
-    html+='<div class="pack-section-header '+(isOpen?"open":"") +'" onclick="toggleSekce('+si+')">';
-    html+='<div><div class="ptitle">'+sekce.sekce+'</div><div class="pack-bar"><div class="pack-bar-fill" style="width:'+pct+'%"></div></div></div>';
-    html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+secTotal+'</span><span class="arrow">▼</span></div>';
+    html+='<div class="pack-section-header '+(isOpen?"open":"")+'" onclick="toggleSekce('+si+')">';
+    html+='<div><div class="ptitle">'+s+'</div><div class="pack-bar"><div class="pack-bar-fill" style="width:'+pct+'%"></div></div></div>';
+    html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+items.length+'</span><span class="arrow">▼</span></div>';
     html+='</div><div class="pack-items '+(isOpen?"open":"")+'">';
-    sekce.polozky.forEach(function(p,pi){
-      var pid="pi_"+si+"_"+pi;
-      html+='<div class="pack-item '+(state[p]?"done":"")+'"><input type="checkbox" id="'+pid+'" '+(state[p]?"checked":"") +' onchange="togglePack('+si+','+pi+',this.checked)"><label for="'+pid+'" class="item-text">'+p+'</label></div>';
+    items.forEach(function(p){
+      html+='<div class="pack-item '+(state[p.id]?"done":"")+'"><input type="checkbox" '+(state[p.id]?"checked":"")+' onchange="togglePack(\''+p.id+'\',this.checked)"><span class="item-text">'+p.polozka+'</span></div>';
     });
     html+='</div></div>';
   });
@@ -250,7 +237,7 @@ function renderPack(){
 }
 
 function toggleSekce(si){var s=loadPackState();s["__open_"+si]=s["__open_"+si]===false?true:false;savePackState(s);renderPack();}
-function togglePack(si,pi,val){var list=getPackList();var item=list[si].polozky[pi];var s=loadPackState();s[item]=val;savePackState(s);renderPack();}
+function togglePack(id,val){var s=loadPackState();s[id]=val;savePackState(s);renderPack();}
 function resetPack(){if(confirm("Resetovat celý seznam balení?")){localStorage.removeItem(getPackKey());renderPack();}}
 
 function fmt(n){return Math.round(n).toLocaleString("cs-CZ")+" Kč";}
@@ -285,7 +272,6 @@ function showApp(){
     document.getElementById("tab-admin").classList.add("active");
     loadAdminData();
   } else {loadTrzby();loadChecklist();}
-  renderPack();
 }
 
 window.addEventListener("load",function(){var t=getToken()||localStorage.getItem("bf_token");if(t){document.getElementById("login-token").value=t;doLogin();}});
@@ -384,7 +370,7 @@ function showTab(name,btn){
   document.getElementById("tab-"+name).classList.add("active");
   btn.classList.add("active");
   if(name==="admin")loadAdminData();
-  if(name==="baleni")renderPack();
+  if(name==="baleni")loadBaleni();
 }
 </script>
 </body>
