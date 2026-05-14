@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,9 +18,9 @@ header{background:#1a1a2e;padding:16px 16px 12px;border-bottom:0.5px solid rgba(
 header h1{font-size:17px;font-weight:600;color:#fff}
 header p{font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px}
 nav{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:0.5px solid rgba(255,255,255,0.15);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;padding:10px 4px 8px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color 0.15s}
+nav button{flex:1;padding:10px 4px 8px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color 0.15s}
 nav button.active{color:#f4a623}
-nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tab{display:none;padding:16px}
 .tab.active{display:block}
 .card{background:#1e1e32;border-radius:12px;border:0.5px solid rgba(255,255,255,0.1);padding:14px;margin-bottom:12px}
@@ -35,7 +35,6 @@ select option{background:#1e1e32}
 .btn{background:#f4a623;color:#1a1a2e;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;width:100%;justify-content:center}
 .btn:active{opacity:0.85}
 .btn-sm{padding:7px 12px;font-size:12px;border-radius:6px;width:auto}
-.btn-danger{background:rgba(229,57,53,0.2);color:#ef5350}
 .btn-ghost{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7)}
 .btn-warn{background:rgba(244,166,35,0.15);color:#f4a623;border:0.5px solid rgba(244,166,35,0.3)}
 .btn-red{background:rgba(229,57,53,0.15);color:#ef5350;border:0.5px solid rgba(229,57,53,0.3)}
@@ -55,7 +54,7 @@ select option{background:#1e1e32}
 .check-item input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:#f4a623;cursor:pointer}
 .check-item .item-text{font-size:13px;flex:1}
 .check-item.done .item-text{text-decoration:line-through;color:rgba(255,255,255,0.35)}
-.check-phase{font-size:11px;font-weight:700;letter-spacing:.08em;color:#f4a623;margin:16px 0 6px}
+.check-phase{font-size:11px;font-weight:700;letter-spacing:.08em;color:#f4a623;margin:16px 0 6px;text-transform:uppercase}
 .progress-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-bottom:8px;overflow:hidden}
 .progress-fill{height:100%;background:#f4a623;border-radius:2px;transition:width 0.3s}
 .empty-state{text-align:center;padding:32px 20px;color:rgba(255,255,255,0.35);font-size:14px}
@@ -63,17 +62,28 @@ select option{background:#1e1e32}
 .notif-card.zasoby{border-left-color:#f4a623}
 .notif-card .notif-head{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:4px}
 .notif-card .notif-text{font-size:13px}
-.badge-new{display:inline-block;background:rgba(229,57,53,0.2);color:#ef5350;border-radius:20px;font-size:10px;padding:2px 7px;font-weight:600;margin-left:6px}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.2);border-top-color:#f4a623;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1e1e32;border:0.5px solid rgba(255,255,255,0.15);border-radius:10px;padding:10px 18px;font-size:13px;z-index:999;opacity:0;transition:opacity 0.3s;white-space:nowrap}
 .toast.show{opacity:1}
-/* Admin extra */
+.pack-section{margin-bottom:6px}
+.pack-section-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#1e1e32;border-radius:10px;cursor:pointer;border:0.5px solid rgba(255,255,255,0.1)}
+.pack-section-header .ptitle{font-size:14px;font-weight:600}
+.pack-section-header .arrow{font-size:12px;color:rgba(255,255,255,0.4);transition:transform 0.2s;margin-left:8px}
+.pack-section-header.open .arrow{transform:rotate(180deg)}
+.pack-items{display:none;padding:4px 0 8px}
+.pack-items.open{display:block}
+.pack-item{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:0.5px solid rgba(255,255,255,0.05)}
+.pack-item:last-child{border-bottom:none}
+.pack-item input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:#f4a623;cursor:pointer}
+.pack-item .item-text{font-size:13px;flex:1}
+.pack-item.done .item-text{text-decoration:line-through;color:rgba(255,255,255,0.3)}
+.pack-bar{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:5px;overflow:hidden;width:100px}
+.pack-bar-fill{height:100%;background:#f4a623;border-radius:2px;transition:width 0.3s}
 .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .admin-card{background:#1e1e32;border-radius:10px;padding:12px;border:0.5px solid rgba(255,255,255,0.1)}
 .admin-card .label{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px}
 .admin-card .value{font-size:20px;font-weight:600}
-.admin-card .sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
 .stan-row{background:#12121f;border-radius:8px;padding:10px 12px;margin-bottom:6px}
 .stan-row .stan-name{font-size:13px;font-weight:600;margin-bottom:6px}
 .stan-bars{display:flex;gap:6px}
@@ -86,10 +96,8 @@ select option{background:#1e1e32}
 </style>
 </head>
 <body>
-
 <div id="toast" class="toast"></div>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div style="font-size:48px;margin-bottom:12px">🍺</div>
   <h1>Beerfest 2026</h1>
@@ -101,19 +109,14 @@ select option{background:#1e1e32}
   </div>
 </div>
 
-<!-- APP -->
 <div id="app-screen">
   <header>
     <h1 id="header-title">🍺 Beerfest 2026</h1>
     <p id="header-sub">Načítám...</p>
   </header>
 
-  <!-- TRŽBY -->
   <div class="tab active" id="tab-trzby">
-    <div class="sum-card">
-      <div class="label">Celkové tržby – moje stanoviště</div>
-      <div class="value" id="trzby-total">0 Kč</div>
-    </div>
+    <div class="sum-card"><div class="label">Celkové tržby – moje stanoviště</div><div class="value" id="trzby-total">0 Kč</div></div>
     <div class="sum-grid">
       <div class="mini-sum"><div class="label">Hotovost</div><div class="value" id="trzby-cash-total">0 Kč</div></div>
       <div class="mini-sum"><div class="label">Karta</div><div class="value" id="trzby-card-total">0 Kč</div></div>
@@ -130,7 +133,6 @@ select option{background:#1e1e32}
     <div id="trzby-list"><div class="empty-state">Zatím žádné záznamy</div></div>
   </div>
 
-  <!-- CHECKLIST -->
   <div class="tab" id="tab-check">
     <div class="card" style="padding:12px 14px">
       <div class="card-title">Průběh</div>
@@ -140,7 +142,16 @@ select option{background:#1e1e32}
     <div id="checklist-container"><div class="empty-state">Načítám checklist...</div></div>
   </div>
 
-  <!-- NOTIFIKACE -->
+  <div class="tab" id="tab-baleni">
+    <div class="card" style="padding:12px 14px;margin-bottom:16px">
+      <div class="card-title">Průběh balení</div>
+      <div class="progress-bar"><div class="progress-fill" id="pack-progress" style="width:0%"></div></div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.6)" id="pack-count">0 / 0 položek zabaleno</div>
+    </div>
+    <div id="pack-container"></div>
+    <button class="btn btn-ghost" style="margin-top:12px" onclick="resetPack()">↺ Resetovat seznam</button>
+  </div>
+
   <div class="tab" id="tab-notif">
     <div class="card">
       <div class="card-title">Nahlásit problém nebo zásoby</div>
@@ -154,17 +165,15 @@ select option{background:#1e1e32}
     <div id="notif-list"><div class="empty-state">Zatím nic odesláno</div></div>
   </div>
 
-  <!-- ADMIN – PŘEHLED -->
   <div class="tab" id="tab-admin">
     <div id="admin-content"><div class="empty-state">Načítám přehled...</div></div>
   </div>
 
-  <!-- ADMIN – BRIGÁDNÍCI -->
   <div class="tab" id="tab-brigad">
     <div class="card">
       <div class="card-title">Přidat brigádníka</div>
       <div class="row"><div class="field"><label>Jméno</label><input type="text" id="b-jmeno" placeholder="Jméno a příjmení"></div></div>
-      <div class="row"><div class="field"><label>Stanoviště</label><input type="text" id="b-stanoviste" placeholder="např. Beertruck, Pivní stan..."></div></div>
+      <div class="row"><div class="field"><label>Stanoviště</label><input type="text" id="b-stanoviste" placeholder="Beertruck / TODI / Manažer"></div></div>
       <button class="btn" onclick="addBrigadnik()">+ Přidat a vygenerovat odkaz</button>
     </div>
     <div class="section-title">Brigádníci a jejich odkazy</div>
@@ -172,292 +181,210 @@ select option{background:#1e1e32}
   </div>
 
   <nav id="main-nav">
-    <button class="active" onclick="showTab('trzby',this)">
-      <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      Tržby
-    </button>
-    <button onclick="showTab('check',this)">
-      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      Checklist
-    </button>
-    <button onclick="showTab('notif',this)">
-      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      Hlásit
-    </button>
+    <button class="active" onclick="showTab('trzby',this)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Tržby</button>
+    <button onclick="showTab('check',this)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+    <button onclick="showTab('baleni',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Balení</button>
+    <button onclick="showTab('notif',this)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Hlásit</button>
   </nav>
 </div>
 
 <script>
-var API = "https://script.google.com/macros/s/AKfycbyxgEYxH1tVe1unV4UB2lBcNB22AxQVKal9zPS09558t0imWR41hy5ktC2gnVlxxmzoOQ/exec";
-var ADMIN_TOKEN = "admin2026";
-var currentUser = null;
-var isAdmin = false;
-var localNotifs = [];
-var localTrzby = [];
+var API="https://script.google.com/macros/s/AKfycbyxgEYxH1tVe1unV4UB2lBcNB22AxQVKal9zPS09558t0imWR41hy5ktC2gnVlxxmzoOQ/exec";
+var ADMIN_TOKEN="admin2026";
+var currentUser=null,isAdmin=false,localNotifs=[],localTrzby=[];
 
-function getToken() {
-  var params = new URLSearchParams(window.location.search);
-  return params.get("token") || "";
+var PACK_LISTS={
+  "Beertruck":[
+    {sekce:"🍺 Alkohol & nápoje",polozky:["Sudy aperol točený","Sudy prosecco točené","Sudy Kofola","Ginger beer","Sodovka","Tonic","Coca Cola","Cola Zero","Gordon's Gin","Amundsen Vodka","Havana Rum","Becherovka","Poněšice slivovice","Finsbury Gin","Božkov Zelená","Víno červené","Víno bílé (Chardonnay, Primitivo)"]},
+    {sekce:"🍋 Ovoce & garnish",polozky:["Maliny","Pomeranče (na drinky)","Limety","Máta","Okurka (na G&T)"]},
+    {sekce:"🥤 Kelímky & servis",polozky:["Kelímky shots","Kelímky 0,4l nevratné","Kelímky víno 0,2l","Kelímky Kofola 0,5l","Brčka","Ubrousky","Tácky"]},
+    {sekce:"🔧 Vybavení baru",polozky:["Jigger (odměrka)","Třepačka / shaker","Prkénko na krájení","Nůž na ovoce","Otvírák na lahve","Lžíce barová","Nádoby na led (min 3x)","Ledovač / lopatka na led"]},
+    {sekce:"💰 Pokladna",polozky:["Terminál + kabel + nabíječka","Kasa + základ a drobné","Záložní baterie / powerbank"]},
+    {sekce:"🧹 Úklid",polozky:["Pytle na odpadky","Hadry / utěrky","Odpadkové koše"]}
+  ],
+  "TODI":[
+    {sekce:"🧊 Vybavení kuchyně",polozky:["Chladící vany 2x","Mísa na hranolky / velkej kastrol TODI","Fritézy 2x","Gril 2x + bomba + kleště","Ohřívací vana","Špachtle na gril","Pinzeta","Pokličky na maso","Nože","Prkýnka","Gastrošky","Kýbl na vodu / odmytí nádobí"]},
+    {sekce:"🍔 Suroviny – jídlo",polozky:["Hovězí maso","Cheddar – plátky a strouhaný","Rajčata (bedna)","Polníček (2 balení – chlaďák)","Jalapeňo (1 lahev – front line)","Cibule karamelizovaná (min 15 kg – nadělat!)","Housky (300 ks)","Slanina"]},
+    {sekce:"🥫 Omáčky & dipy",polozky:["Majonézy na burger (5 lahví od každé)","Classic omáčka (majolka-kečup-koření)","Sýrový dip","Mayo","Tatarka","Kečup","Baconeise","Chipotle"]},
+    {sekce:"🥤 Nápoje",polozky:["Cola","Cola Zero","Voda"]},
+    {sekce:"📦 Obaly & servis",polozky:["Obaly – krabičky TODI (u dveří)","Papír na balení","Ubrousky","Příbory","Píchatka / párátka","Rukavice","Solničky + pepřenky"]},
+    {sekce:"🔧 Technika & infrastruktura",polozky:["Stůl dřevěný 2x","Stůl plast 2x","Lednice 2x","Světlo","Prodlužováky + buben + gumák","Antoníček","Voda (na provoz)","Stan","Bočnice","Muší křídla"]},
+    {sekce:"👕 Oblečení & hygiena",polozky:["Firemní trička / zástěry","Hadry","Utěrky","Papírové utěrky","Folie průhledná","Pytle do koše"]},
+    {sekce:"💰 Pokladna",polozky:["Kasa + základ a drobné","Terminál + kabel","Sikovky"]}
+  ],
+  "Manažer":[
+    {sekce:"📋 Dokumenty & kontrola",polozky:["Checklist pro každé stanoviště","Seznam brigádníků + telefony","Plán rozmístění stanovišť","Kontakt na dodavatele"]},
+    {sekce:"🔧 Vybavení manažera",polozky:["Nabitý telefon + powerbank","Firemní tričko / identifikace"]},
+    {sekce:"💰 Finance",polozky:["Záložní hotovost","Obálky na tržby","Bloček + pero"]}
+  ]
+};
+
+function getPackList(){if(!currentUser)return[];return PACK_LISTS[currentUser.stanoviste]||PACK_LISTS["Manažer"]||[];}
+function getPackKey(){return"pack_"+(currentUser?currentUser.stanoviste:"x");}
+function loadPackState(){try{return JSON.parse(localStorage.getItem(getPackKey())||"{}");}catch(e){return{};}}
+function savePackState(s){localStorage.setItem(getPackKey(),JSON.stringify(s));}
+
+function renderPack(){
+  var list=getPackList(),state=loadPackState(),total=0,done=0;
+  list.forEach(function(s){s.polozky.forEach(function(p){total++;if(state[p])done++;});});
+  document.getElementById("pack-progress").style.width=(total?Math.round(done/total*100):0)+"%";
+  document.getElementById("pack-count").textContent=done+" / "+total+" položek zabaleno";
+  var html="";
+  list.forEach(function(sekce,si){
+    var secDone=sekce.polozky.filter(function(p){return state[p];}).length;
+    var secTotal=sekce.polozky.length;
+    var pct=secTotal?Math.round(secDone/secTotal*100):0;
+    var isOpen=state["__open_"+si]!==false;
+    html+='<div class="pack-section">';
+    html+='<div class="pack-section-header '+(isOpen?"open":"") +'" onclick="toggleSekce('+si+')">';
+    html+='<div><div class="ptitle">'+sekce.sekce+'</div><div class="pack-bar"><div class="pack-bar-fill" style="width:'+pct+'%"></div></div></div>';
+    html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+secTotal+'</span><span class="arrow">▼</span></div>';
+    html+='</div><div class="pack-items '+(isOpen?"open":"")+'">';
+    sekce.polozky.forEach(function(p){
+      var pid="pi_"+si+"_"+p.replace(/[^a-z0-9]/gi,"_");
+      html+='<div class="pack-item '+(state[p]?"done":"")+'"><input type="checkbox" id="'+pid+'" '+(state[p]?"checked":"") +' onchange="togglePack(\''+p.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\\',this.checked)"><label for="'+pid+'" class="item-text">'+p+'</label></div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById("pack-container").innerHTML=html||'<div class="empty-state">Žádný seznam</div>';
 }
 
-function fmt(n) { return Math.round(n).toLocaleString("cs-CZ") + " Kč"; }
+function toggleSekce(si){var s=loadPackState();s["__open_"+si]=s["__open_"+si]===false?true:false;savePackState(s);renderPack();}
+function togglePack(item,val){var s=loadPackState();s[item]=val;savePackState(s);renderPack();}
+function resetPack(){if(confirm("Resetovat celý seznam balení?")){localStorage.removeItem(getPackKey());renderPack();}}
 
-function toast(msg, dur) {
-  var el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  setTimeout(function(){ el.classList.remove("show"); }, dur || 2500);
+function fmt(n){return Math.round(n).toLocaleString("cs-CZ")+" Kč";}
+function toast(msg,dur){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(function(){el.classList.remove("show");},dur||2500);}
+function getToken(){return new URLSearchParams(window.location.search).get("token")||"";}
+async function apiGet(p){var r=await fetch(API+"?"+new URLSearchParams(p).toString());return await r.json();}
+async function apiPost(b){var r=await fetch(API,{method:"POST",body:JSON.stringify(b)});return await r.json();}
+
+async function doLogin(){
+  var token=document.getElementById("login-token").value.trim();
+  if(!token){toast("Zadej přístupový kód");return;}
+  var btn=document.getElementById("login-btn");
+  btn.innerHTML='<span class="spinner"></span>Přihlašuji...';btn.disabled=true;
+  if(token===ADMIN_TOKEN){isAdmin=true;currentUser={jmeno:"Manažer",stanoviste:"Manažer",token:ADMIN_TOKEN};localStorage.setItem("bf_token",token);showApp();return;}
+  var res=await apiGet({action:"getBrigadnik",token:token});
+  btn.innerHTML="Přihlásit se";btn.disabled=false;
+  if(res.ok){currentUser=res;localStorage.setItem("bf_token",token);showApp();}
+  else toast("❌ Neplatný přístupový kód");
 }
 
-function loading(btnId, state) {
-  var btn = document.getElementById(btnId);
-  if (!btn) return;
-  btn.disabled = state;
-  if (state) btn.innerHTML = '<span class="spinner"></span>Ukládám...';
-}
-
-async function apiGet(params) {
-  var url = API + "?" + new URLSearchParams(params).toString();
-  var r = await fetch(url);
-  return await r.json();
-}
-
-async function apiPost(body) {
-  var r = await fetch(API, {method:"POST", body: JSON.stringify(body)});
-  return await r.json();
-}
-
-// LOGIN
-async function doLogin() {
-  var token = document.getElementById("login-token").value.trim();
-  if (!token) { toast("Zadej přístupový kód"); return; }
-  var btn = document.getElementById("login-btn");
-  btn.innerHTML = '<span class="spinner"></span>Přihlašuji...';
-  btn.disabled = true;
-
-  if (token === ADMIN_TOKEN) {
-    isAdmin = true;
-    currentUser = {jmeno: "Manažer", stanoviste: "Admin", token: ADMIN_TOKEN};
-    showApp();
-    return;
-  }
-
-  var res = await apiGet({action:"getBrigadnik", token: token});
-  btn.innerHTML = "Přihlásit se";
-  btn.disabled = false;
-  if (res.ok) {
-    currentUser = res;
-    localStorage.setItem("bf_token", token);
-    showApp();
-  } else {
-    toast("❌ Neplatný přístupový kód");
-  }
-}
-
-function showApp() {
-  document.getElementById("login-screen").style.display = "none";
-  document.getElementById("app-screen").style.display = "block";
-  document.getElementById("header-title").textContent = "🍺 " + currentUser.jmeno;
-  document.getElementById("header-sub").textContent = isAdmin ? "Manažerský přehled" : "Stanoviště: " + currentUser.stanoviste;
-
-  if (isAdmin) {
-    // Přidej admin záložky
-    var nav = document.getElementById("main-nav");
-    nav.innerHTML = '<button class="active" onclick="showTab(\'admin\',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Přehled</button><button onclick="showTab(\'brigad\',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Brigádníci</button>';
+function showApp(){
+  document.getElementById("login-screen").style.display="none";
+  document.getElementById("app-screen").style.display="block";
+  document.getElementById("header-title").textContent="🍺 "+currentUser.jmeno;
+  document.getElementById("header-sub").textContent=isAdmin?"Manažerský přehled":"Stanoviště: "+currentUser.stanoviste;
+  if(isAdmin){
+    document.getElementById("main-nav").innerHTML=
+      '<button class="active" onclick="showTab(\'admin\',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Přehled</button>'+
+      '<button onclick="showTab(\'baleni\',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Balení</button>'+
+      '<button onclick="showTab(\'brigad\',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Brigádníci</button>';
     document.getElementById("tab-trzby").classList.remove("active");
     document.getElementById("tab-admin").classList.add("active");
     loadAdminData();
-  } else {
-    loadTrzby();
-    loadChecklist();
-  }
+  } else {loadTrzby();loadChecklist();}
+  renderPack();
 }
 
-// Auto-login
-window.addEventListener("load", function() {
-  var token = getToken() || localStorage.getItem("bf_token");
-  if (token) {
-    document.getElementById("login-token").value = token;
-    doLogin();
-  }
-});
+window.addEventListener("load",function(){var t=getToken()||localStorage.getItem("bf_token");if(t){document.getElementById("login-token").value=t;doLogin();}});
 
-// TRŽBY
-async function loadTrzby() {
-  var res = await apiGet({action:"getTrzby", token: currentUser.token});
-  if (!res.ok) return;
-  localTrzby = res.zaznamy || [];
-  renderTrzby();
+async function loadTrzby(){var res=await apiGet({action:"getTrzby",token:currentUser.token});if(!res.ok)return;localTrzby=res.zaznamy||[];renderTrzby();}
+function renderTrzby(){
+  var cash=0,card=0;localTrzby.forEach(function(t){cash+=t.hotovost||0;card+=t.karta||0;});
+  document.getElementById("trzby-cash-total").textContent=fmt(cash);
+  document.getElementById("trzby-card-total").textContent=fmt(card);
+  document.getElementById("trzby-total").textContent=fmt(cash+card);
+  var el=document.getElementById("trzby-list");
+  if(!localTrzby.length){el.innerHTML='<div class="empty-state">Zatím žádné záznamy</div>';return;}
+  el.innerHTML=[...localTrzby].reverse().map(function(t){return'<div class="entry"><div><div class="name">'+(t.cas||"")+'</div><div class="sub">Hotovost: '+fmt(t.hotovost||0)+' · Karta: '+fmt(t.karta||0)+'</div></div><span class="amount">'+fmt((t.hotovost||0)+(t.karta||0))+'</span></div>';}).join("");
+}
+async function saveTrzba(){
+  var cash=parseFloat(document.getElementById("t-cash").value)||0;
+  var card=parseFloat(document.getElementById("t-card").value)||0;
+  if(!cash&&!card){toast("Zadej alespoň jednu částku");return;}
+  var btn=document.querySelector('#tab-trzby .btn');btn.innerHTML='<span class="spinner"></span>Ukládám...';btn.disabled=true;
+  var res=await apiPost({action:"saveTrzby",token:currentUser.token,hotovost:cash,karta:card});
+  btn.innerHTML="Uložit tržbu";btn.disabled=false;
+  if(res.ok){toast("✅ Tržba uložena");document.getElementById("t-cash").value="";document.getElementById("t-card").value="";localTrzby.push({cas:new Date().toLocaleString("cs-CZ"),hotovost:cash,karta:card});renderTrzby();}
+  else toast("❌ Chyba: "+(res.error||"zkus znovu"));
 }
 
-function renderTrzby() {
-  var cash = 0, card = 0;
-  localTrzby.forEach(function(t){ cash += t.hotovost||0; card += t.karta||0; });
-  document.getElementById("trzby-cash-total").textContent = fmt(cash);
-  document.getElementById("trzby-card-total").textContent = fmt(card);
-  document.getElementById("trzby-total").textContent = fmt(cash+card);
-  var el = document.getElementById("trzby-list");
-  if (!localTrzby.length) { el.innerHTML = '<div class="empty-state">Zatím žádné záznamy</div>'; return; }
-  el.innerHTML = [...localTrzby].reverse().map(function(t){
-    return '<div class="entry"><div><div class="name">' + (t.cas||"") + '</div><div class="sub">Hotovost: ' + fmt(t.hotovost||0) + ' · Karta: ' + fmt(t.karta||0) + '</div></div><span class="amount">' + fmt((t.hotovost||0)+(t.karta||0)) + '</span></div>';
-  }).join("");
-}
-
-async function saveTrzba() {
-  var cash = parseFloat(document.getElementById("t-cash").value)||0;
-  var card = parseFloat(document.getElementById("t-card").value)||0;
-  if (!cash && !card) { toast("Zadej alespoň jednu částku"); return; }
-  var btn = document.querySelector('#tab-trzby .btn');
-  btn.innerHTML = '<span class="spinner"></span>Ukládám...';
-  btn.disabled = true;
-  var res = await apiPost({action:"saveTrzby", token: currentUser.token, hotovost: cash, karta: card});
-  btn.innerHTML = "Uložit tržbu";
-  btn.disabled = false;
-  if (res.ok) {
-    toast("✅ Tržba uložena");
-    document.getElementById("t-cash").value = "";
-    document.getElementById("t-card").value = "";
-    localTrzby.push({cas: new Date().toLocaleString("cs-CZ"), hotovost: cash, karta: card});
-    renderTrzby();
-  } else {
-    toast("❌ Chyba: " + (res.error||"zkus znovu"));
-  }
-}
-
-// CHECKLIST
-async function loadChecklist() {
-  var res = await apiGet({action:"getChecklist", token: currentUser.token});
-  if (!res.ok) { document.getElementById("checklist-container").innerHTML = '<div class="empty-state">Nepodařilo se načíst</div>'; return; }
+async function loadChecklist(){
+  var res=await apiGet({action:"getChecklist",token:currentUser.token});
+  if(!res.ok){document.getElementById("checklist-container").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
   renderChecklist(res.polozky||[]);
 }
-
-function renderChecklist(polozky) {
-  var total = polozky.length;
-  var done = polozky.filter(function(p){ return p.hotovo; }).length;
-  document.getElementById("check-progress").style.width = (total ? Math.round(done/total*100) : 0) + "%";
-  document.getElementById("check-count").textContent = done + " / " + total + " hotovo";
-  var faze = {};
-  polozky.forEach(function(p){ if (!faze[p.faze]) faze[p.faze] = []; faze[p.faze].push(p); });
-  var html = "";
+function renderChecklist(polozky){
+  var total=polozky.length,done=polozky.filter(function(p){return p.hotovo;}).length;
+  document.getElementById("check-progress").style.width=(total?Math.round(done/total*100):0)+"%";
+  document.getElementById("check-count").textContent=done+" / "+total+" hotovo";
+  var faze={};polozky.forEach(function(p){if(!faze[p.faze])faze[p.faze]=[];faze[p.faze].push(p);});
+  var html="";
   Object.keys(faze).forEach(function(f){
-    html += '<div class="check-phase">' + f + '</div><div class="card" style="padding:8px 14px">';
-    faze[f].forEach(function(p){
-      html += '<div class="check-item ' + (p.hotovo?"done":"") + '"><input type="checkbox" ' + (p.hotovo?"checked":"") + ' onchange="toggleCheck(\'' + p.id + '\',this.checked)"><span class="item-text">' + p.ukol + '</span></div>';
-    });
-    html += "</div>";
+    html+='<div class="check-phase">'+f+'</div><div class="card" style="padding:8px 14px">';
+    faze[f].forEach(function(p){html+='<div class="check-item '+(p.hotovo?"done":"")+'"><input type="checkbox" '+(p.hotovo?"checked":"") +' onchange="toggleCheck(\''+p.id+'\',this.checked)"><span class="item-text">'+p.ukol+'</span></div>';});
+    html+='</div>';
   });
-  document.getElementById("checklist-container").innerHTML = html || '<div class="empty-state">Žádné položky</div>';
+  document.getElementById("checklist-container").innerHTML=html||'<div class="empty-state">Žádné položky</div>';
+}
+async function toggleCheck(id,val){await apiPost({action:"saveChecklist",token:currentUser.token,id:id,hotovo:val});loadChecklist();}
+
+async function sendNotif(typ){
+  var text=document.getElementById("notif-text").value.trim();
+  if(!text){toast("Napiš zprávu");return;}
+  var btns=document.querySelectorAll('#tab-notif .btn-warn, #tab-notif .btn-red');
+  btns.forEach(function(b){b.disabled=true;});
+  var res=await apiPost({action:"sendNotifikace",token:currentUser.token,typ:typ,zprava:text});
+  btns.forEach(function(b){b.disabled=false;});
+  if(res.ok){toast("✅ Zpráva odeslána");localNotifs.unshift({cas:new Date().toLocaleString("cs-CZ"),typ:typ,zprava:text});document.getElementById("notif-text").value="";renderNotifs();}
+  else toast("❌ Chyba, zkus znovu");
+}
+function renderNotifs(){
+  var el=document.getElementById("notif-list");
+  if(!localNotifs.length){el.innerHTML='<div class="empty-state">Zatím nic odesláno</div>';return;}
+  el.innerHTML=localNotifs.map(function(n){return'<div class="notif-card '+n.typ+'"><div class="notif-head">'+(n.typ==="zasoby"?"⚠️ Zásoby":"🚨 Problém")+' · '+n.cas+'</div><div class="notif-text">'+n.zprava+'</div></div>';}).join("");
 }
 
-async function toggleCheck(id, val) {
-  await apiPost({action:"saveChecklist", token: currentUser.token, id: id, hotovo: val});
-  loadChecklist();
+async function loadAdminData(){
+  document.getElementById("admin-content").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
+  var res=await apiGet({action:"getVsechnaData",token:ADMIN_TOKEN});
+  var notifRes=await apiGet({action:"getNotifikace",token:ADMIN_TOKEN});
+  if(!res.ok){document.getElementById("admin-content").innerHTML='<div class="empty-state">Chyba načítání</div>';return;}
+  var trzby=res.trzby||{},totalCash=0,totalCard=0;
+  Object.values(trzby).forEach(function(s){totalCash+=s.hotovost||0;totalCard+=s.karta||0;});
+  var notifikace=(notifRes.notifikace||[]).filter(function(n){return n.stav==="NOVÁ";});
+  var notifHtml="";
+  if(notifikace.length){notifHtml='<div class="section-title">🔔 Nové notifikace ('+notifikace.length+')</div>';notifHtml+=notifikace.reverse().map(function(n){return'<div class="notif-card '+n.typ+'"><div class="notif-head">'+n.jmeno+' · '+n.stanoviste+' · '+n.cas+'</div><div class="notif-text">'+n.zprava+'</div></div>';}).join("");}
+  var stanHtml=Object.entries(trzby).map(function(e){var stan=e[0],d=e[1],total=(d.hotovost||0)+(d.karta||0);var pctCash=total?Math.round((d.hotovost||0)/total*100):0;var pctCard=total?Math.round((d.karta||0)/total*100):0;return'<div class="stan-row"><div class="stan-name">'+stan+' <span style="font-weight:400;color:#f4a623;font-size:13px">– '+fmt(total)+'</span></div><div class="stan-bars"><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Hotovost</span><span>'+fmt(d.hotovost||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill cash" style="width:'+pctCash+'%"></div></div></div><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Karta</span><span>'+fmt(d.karta||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill card" style="width:'+pctCard+'%"></div></div></div></div></div>';}).join("")||'<div class="empty-state">Zatím žádné tržby</div>';
+  document.getElementById("admin-content").innerHTML='<div class="sum-card"><div class="label">Celkové tržby</div><div class="value">'+fmt(totalCash+totalCard)+'</div></div><div class="admin-grid"><div class="admin-card"><div class="label">Hotovost</div><div class="value">'+fmt(totalCash)+'</div></div><div class="admin-card"><div class="label">Karta</div><div class="value">'+fmt(totalCard)+'</div></div></div>'+notifHtml+'<div class="section-title">Tržby dle stanovišť</div>'+stanHtml+'<button class="btn btn-ghost" style="margin-top:12px" onclick="loadAdminData()">↺ Obnovit</button>';
 }
 
-// NOTIFIKACE
-async function sendNotif(typ) {
-  var text = document.getElementById("notif-text").value.trim();
-  if (!text) { toast("Napiš zprávu"); return; }
-  var btns = document.querySelectorAll('#tab-notif .btn-warn, #tab-notif .btn-red');
-  btns.forEach(function(b){ b.disabled = true; });
-  var res = await apiPost({action:"sendNotifikace", token: currentUser.token, typ: typ, zprava: text});
-  btns.forEach(function(b){ b.disabled = false; });
-  if (res.ok) {
-    toast("✅ Zpráva odeslána organizátorovi");
-    localNotifs.unshift({cas: new Date().toLocaleString("cs-CZ"), typ: typ, zprava: text});
-    document.getElementById("notif-text").value = "";
-    renderNotifs();
-  } else {
-    toast("❌ Chyba, zkus znovu");
-  }
+async function addBrigadnik(){
+  var jmeno=document.getElementById("b-jmeno").value.trim();
+  var stanoviste=document.getElementById("b-stanoviste").value.trim();
+  if(!jmeno||!stanoviste){toast("Vyplň jméno i stanoviště");return;}
+  var btn=document.querySelector('#tab-brigad .btn');btn.innerHTML='<span class="spinner"></span>Přidávám...';btn.disabled=true;
+  var res=await apiPost({action:"addBrigadnik",adminToken:ADMIN_TOKEN,jmeno:jmeno,stanoviste:stanoviste});
+  btn.innerHTML="+ Přidat a vygenerovat odkaz";btn.disabled=false;
+  if(res.ok){toast("✅ Brigádník přidán");document.getElementById("b-jmeno").value="";document.getElementById("b-stanoviste").value="";renderBrigadnikLink(res);}
+  else toast("❌ "+(res.error||"Chyba"));
 }
-
-function renderNotifs() {
-  var el = document.getElementById("notif-list");
-  if (!localNotifs.length) { el.innerHTML = '<div class="empty-state">Zatím nic odesláno</div>'; return; }
-  el.innerHTML = localNotifs.map(function(n){
-    return '<div class="notif-card ' + n.typ + '"><div class="notif-head">' + (n.typ==="zasoby"?"⚠️ Zásoby":"🚨 Problém") + ' · ' + n.cas + '</div><div class="notif-text">' + n.zprava + '</div></div>';
-  }).join("");
-}
-
-// ADMIN
-async function loadAdminData() {
-  document.getElementById("admin-content").innerHTML = '<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
-  var res = await apiGet({action:"getVsechnaData", token: ADMIN_TOKEN});
-  var notifRes = await apiGet({action:"getNotifikace", token: ADMIN_TOKEN});
-  if (!res.ok) { document.getElementById("admin-content").innerHTML = '<div class="empty-state">Chyba načítání</div>'; return; }
-
-  var trzby = res.trzby || {};
-  var totalCash = 0, totalCard = 0;
-  Object.values(trzby).forEach(function(s){ totalCash += s.hotovost||0; totalCard += s.karta||0; });
-  var maxVal = Math.max(...Object.values(trzby).map(function(s){ return (s.hotovost||0)+(s.karta||0); }), 1);
-
-  var notifHtml = "";
-  var notifikace = (notifRes.notifikace||[]).filter(function(n){ return n.stav==="NOVÁ"; });
-  if (notifikace.length) {
-    notifHtml = '<div class="section-title">🔔 Nové notifikace (' + notifikace.length + ')</div>';
-    notifHtml += notifikace.reverse().map(function(n){
-      return '<div class="notif-card ' + n.typ + '"><div class="notif-head">' + n.jmeno + ' · ' + n.stanoviste + ' · ' + n.cas + '</div><div class="notif-text">' + n.zprava + '</div></div>';
-    }).join("");
-  }
-
-  var stanHtml = Object.entries(trzby).map(function(e){
-    var stan = e[0], d = e[1];
-    var total = (d.hotovost||0)+(d.karta||0);
-    var pctCash = total ? Math.round((d.hotovost||0)/total*100) : 0;
-    var pctCard = total ? Math.round((d.karta||0)/total*100) : 0;
-    return '<div class="stan-row"><div class="stan-name">' + stan + ' <span style="font-weight:400;color:#f4a623;font-size:13px">– ' + fmt(total) + '</span></div><div class="stan-bars"><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Hotovost</span><span>' + fmt(d.hotovost||0) + '</span></div><div class="stan-bar-bg"><div class="stan-bar-fill cash" style="width:' + pctCash + '%"></div></div></div><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Karta</span><span>' + fmt(d.karta||0) + '</span></div><div class="stan-bar-bg"><div class="stan-bar-fill card" style="width:' + pctCard + '%"></div></div></div></div></div>';
-  }).join("") || '<div class="empty-state">Zatím žádné tržby</div>';
-
-  document.getElementById("admin-content").innerHTML =
-    '<div class="sum-card"><div class="label">Celkové tržby</div><div class="value">' + fmt(totalCash+totalCard) + '</div></div>' +
-    '<div class="admin-grid"><div class="admin-card"><div class="label">Hotovost</div><div class="value">' + fmt(totalCash) + '</div></div><div class="admin-card"><div class="label">Karta</div><div class="value">' + fmt(totalCard) + '</div></div></div>' +
-    notifHtml +
-    '<div class="section-title">Tržby dle stanovišť</div>' + stanHtml +
-    '<button class="btn btn-ghost" style="margin-top:12px" onclick="loadAdminData()">↺ Obnovit přehled</button>';
-}
-
-// BRIGÁDNÍCI
-async function addBrigadnik() {
-  var jmeno = document.getElementById("b-jmeno").value.trim();
-  var stanoviste = document.getElementById("b-stanoviste").value.trim();
-  if (!jmeno || !stanoviste) { toast("Vyplň jméno i stanoviště"); return; }
-  var btn = document.querySelector('#tab-brigad .btn');
-  btn.innerHTML = '<span class="spinner"></span>Přidávám...';
-  btn.disabled = true;
-  var res = await apiPost({action:"addBrigadnik", adminToken: ADMIN_TOKEN, jmeno: jmeno, stanoviste: stanoviste});
-  btn.innerHTML = "+ Přidat a vygenerovat odkaz";
-  btn.disabled = false;
-  if (res.ok) {
-    toast("✅ Brigádník přidán");
-    document.getElementById("b-jmeno").value = "";
-    document.getElementById("b-stanoviste").value = "";
-    renderBrigadnikLink(res);
-  } else {
-    toast("❌ " + (res.error||"Chyba"));
-  }
-}
-
-var brigListData = [];
-function renderBrigadnikLink(b) {
+var brigListData=[];
+function renderBrigadnikLink(b){
   brigListData.unshift(b);
-  var el = document.getElementById("brigad-list");
-  el.innerHTML = brigListData.map(function(b){
-    var link = window.location.origin + window.location.pathname + "?token=" + b.token;
-    return '<div class="entry" style="flex-direction:column;align-items:flex-start;gap:6px"><div style="display:flex;justify-content:space-between;width:100%"><div><div class="name">' + b.jmeno + '</div><div class="sub">' + b.stanoviste + '</div></div><button class="btn btn-ghost btn-sm" onclick="copyLink(\'' + link + '\')">📋 Kopírovat</button></div><div style="font-size:11px;color:rgba(255,255,255,0.35);word-break:break-all">' + link + '</div></div>';
-  }).join("");
+  document.getElementById("brigad-list").innerHTML=brigListData.map(function(b){var link=window.location.origin+window.location.pathname+"?token="+b.token;return'<div class="entry" style="flex-direction:column;align-items:flex-start;gap:6px"><div style="display:flex;justify-content:space-between;width:100%"><div><div class="name">'+b.jmeno+'</div><div class="sub">'+b.stanoviste+'</div></div><button class="btn btn-ghost btn-sm" onclick="copyLink(\''+link+'\')">📋 Kopírovat</button></div><div style="font-size:11px;color:rgba(255,255,255,0.35);word-break:break-all">'+link+'</div></div>';}).join("");
 }
+function copyLink(link){navigator.clipboard.writeText(link).then(function(){toast("✅ Odkaz zkopírován");});}
 
-function copyLink(link) {
-  navigator.clipboard.writeText(link).then(function(){ toast("✅ Odkaz zkopírován"); });
-}
-
-function showTab(name, btn) {
-  document.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("active"); });
-  document.querySelectorAll("nav button").forEach(function(b){ b.classList.remove("active"); });
-  document.getElementById("tab-" + name).classList.add("active");
+function showTab(name,btn){
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});
+  document.querySelectorAll("nav button").forEach(function(b){b.classList.remove("active");});
+  document.getElementById("tab-"+name).classList.add("active");
   btn.classList.add("active");
-  if (name === "admin") loadAdminData();
+  if(name==="admin")loadAdminData();
+  if(name==="baleni")renderPack();
 }
 </script>
 </body>
