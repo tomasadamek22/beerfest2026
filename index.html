@@ -14,18 +14,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 #login-screen h1{font-size:28px;font-weight:700;color:#f4a623;margin-bottom:6px}
 #login-screen p{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:32px}
 #app-screen{display:none}
-header{background:#1a1a2e;padding:16px 16px 12px;border-bottom:0.5px solid rgba(255,255,255,0.1);position:sticky;top:0;z-index:100}
-header h1{font-size:17px;font-weight:600;color:#fff}
-header p{font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px}
+header{background:#1a1a2e;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.1);position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+header h1{font-size:16px;font-weight:600;color:#fff}
+header p{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px}
 nav{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:0.5px solid rgba(255,255,255,0.15);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;padding:10px 4px 8px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color 0.15s}
+nav button{flex:1;padding:8px 2px 6px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:8.5px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;transition:color 0.15s}
 nav button.active{color:#f4a623}
-nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.tab{display:none;padding:16px}
+nav button svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab{display:none;padding:14px}
 .tab.active{display:block}
 .card{background:#1e1e32;border-radius:12px;border:0.5px solid rgba(255,255,255,0.1);padding:14px;margin-bottom:12px}
 .card-title{font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.section-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:18px 0 8px;padding-left:2px}
+.section-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:16px 0 8px}
 input,select,textarea{width:100%;background:#12121f;border:0.5px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 12px;color:#f0f0f0;font-size:14px;font-family:inherit;outline:none}
 input:focus,select:focus{border-color:rgba(244,166,35,0.6)}
 select option{background:#1e1e32}
@@ -38,13 +38,14 @@ select option{background:#1e1e32}
 .btn-ghost{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7)}
 .btn-warn{background:rgba(244,166,35,0.15);color:#f4a623;border:0.5px solid rgba(244,166,35,0.3)}
 .btn-red{background:rgba(229,57,53,0.15);color:#ef5350;border:0.5px solid rgba(229,57,53,0.3)}
+.btn-logout{background:rgba(255,255,255,0.08);border:none;border-radius:8px;padding:6px 11px;color:rgba(255,255,255,0.5);font-size:11px;cursor:pointer}
 .sum-card{background:linear-gradient(135deg,#f4a623 0%,#e8920a 100%);border-radius:12px;padding:16px;margin-bottom:12px}
 .sum-card .label{font-size:12px;color:rgba(26,26,46,0.7);margin-bottom:4px}
 .sum-card .value{font-size:28px;font-weight:700;color:#1a1a2e}
 .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .mini-sum{background:#1e1e32;border-radius:10px;padding:12px;border:0.5px solid rgba(255,255,255,0.1)}
 .mini-sum .label{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px}
-.mini-sum .value{font-size:18px;font-weight:600;color:#f0f0f0}
+.mini-sum .value{font-size:18px;font-weight:600}
 .entry{background:#12121f;border-radius:8px;padding:10px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
 .entry .name{font-size:13px;font-weight:500}
 .entry .sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px}
@@ -54,7 +55,7 @@ select option{background:#1e1e32}
 .check-item input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:#f4a623;cursor:pointer}
 .check-item .item-text{font-size:13px;flex:1}
 .check-item.done .item-text{text-decoration:line-through;color:rgba(255,255,255,0.35)}
-.check-phase{font-size:11px;font-weight:700;letter-spacing:.08em;color:#f4a623;margin:16px 0 6px;text-transform:uppercase}
+.check-phase{font-size:11px;font-weight:700;letter-spacing:.08em;color:#f4a623;margin:14px 0 6px;text-transform:uppercase}
 .progress-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-bottom:8px;overflow:hidden}
 .progress-fill{height:100%;background:#f4a623;border-radius:2px;transition:width 0.3s}
 .empty-state{text-align:center;padding:32px 20px;color:rgba(255,255,255,0.35);font-size:14px}
@@ -93,6 +94,26 @@ select option{background:#1e1e32}
 .stan-bar-fill{height:100%;border-radius:3px}
 .stan-bar-fill.cash{background:#f4a623}
 .stan-bar-fill.card{background:#4fc3f7}
+/* Briefing */
+.briefing-card{background:linear-gradient(135deg,#1a2a4a,#1e1e32);border:0.5px solid rgba(100,160,255,0.25);border-radius:12px;padding:14px;margin-bottom:8px}
+.briefing-card.new-msg{border-color:rgba(244,166,35,0.5);background:linear-gradient(135deg,#2a200a,#1e1e32)}
+.briefing-card .btime{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px}
+.briefing-card .btext{font-size:14px;line-height:1.55}
+.new-badge{display:inline-block;background:rgba(244,166,35,0.2);color:#f4a623;border-radius:20px;font-size:10px;padding:2px 8px;font-weight:700;margin-bottom:6px}
+/* Kontakty */
+.contact-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#1e1e32;border-radius:10px;margin-bottom:6px;border:0.5px solid rgba(255,255,255,0.08)}
+.contact-item .cname{font-size:14px;font-weight:600}
+.contact-item .crole{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px}
+.contact-item a{background:rgba(244,166,35,0.15);color:#f4a623;border:0.5px solid rgba(244,166,35,0.3);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;margin-left:10px}
+/* Ceník */
+.price-tabs{display:flex;gap:8px;margin-bottom:14px}
+.price-tab{flex:1;padding:9px;background:#1e1e32;border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;cursor:pointer;text-align:center}
+.price-tab.active{background:rgba(244,166,35,0.12);border-color:rgba(244,166,35,0.4);color:#f4a623}
+.price-cat{font-size:11px;font-weight:700;letter-spacing:.06em;color:#f4a623;margin:14px 0 6px;text-transform:uppercase}
+.price-item{display:flex;align-items:center;padding:10px 12px;background:#1e1e32;border-radius:8px;margin-bottom:4px;border:0.5px solid rgba(255,255,255,0.06)}
+.price-item .pname{font-size:13px;flex:1}
+.price-item .psize{font-size:11px;color:rgba(255,255,255,0.38);margin:0 8px;white-space:nowrap}
+.price-item .pprice{font-size:15px;font-weight:700;color:#f4a623;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -110,11 +131,12 @@ select option{background:#1e1e32}
 </div>
 
 <div id="app-screen">
-  <header style="display:flex;justify-content:space-between;align-items:center">
-    <div><h1 id="header-title">🍺 Beerfest 2026</h1>
-    <p id="header-sub">Načítám...</p></div><button onclick="logout()" style="background:rgba(255,255,255,0.08);border:none;border-radius:8px;padding:7px 12px;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer">Odhlásit</button>
+  <header>
+    <div><h1 id="header-title">🍺 Beerfest 2026</h1><p id="header-sub">Načítám...</p></div>
+    <button class="btn-logout" onclick="logout()">Odhlásit</button>
   </header>
 
+  <!-- TRŽBY -->
   <div class="tab active" id="tab-trzby">
     <div class="sum-card"><div class="label">Celkové tržby – moje stanoviště</div><div class="value" id="trzby-total">0 Kč</div></div>
     <div class="sum-grid">
@@ -133,6 +155,7 @@ select option{background:#1e1e32}
     <div id="trzby-list"><div class="empty-state">Zatím žádné záznamy</div></div>
   </div>
 
+  <!-- CHECKLIST -->
   <div class="tab" id="tab-check">
     <div class="card" style="padding:12px 14px">
       <div class="card-title">Průběh</div>
@@ -142,6 +165,7 @@ select option{background:#1e1e32}
     <div id="checklist-container"><div class="empty-state">Načítám checklist...</div></div>
   </div>
 
+  <!-- BALENÍ -->
   <div class="tab" id="tab-baleni">
     <div class="card" style="padding:12px 14px;margin-bottom:16px">
       <div class="card-title">Průběh balení</div>
@@ -152,6 +176,7 @@ select option{background:#1e1e32}
     <button class="btn btn-ghost" style="margin-top:12px" onclick="resetPack()">↺ Resetovat seznam</button>
   </div>
 
+  <!-- HLÁSIT -->
   <div class="tab" id="tab-notif">
     <div class="card">
       <div class="card-title">Nahlásit problém nebo zásoby</div>
@@ -165,10 +190,80 @@ select option{background:#1e1e32}
     <div id="notif-list"><div class="empty-state">Zatím nic odesláno</div></div>
   </div>
 
+  <!-- BRIEFING -->
+  <div class="tab" id="tab-briefing">
+    <div id="admin-briefing-form" style="display:none">
+      <div class="card">
+        <div class="card-title">📢 Odeslat zprávu všem</div>
+        <div class="row"><div class="field"><textarea id="briefing-input" rows="4" placeholder="Napiš zprávu pro celý tým..." style="resize:none"></textarea></div></div>
+        <button class="btn" onclick="sendBriefing()">Odeslat zprávu týmu</button>
+      </div>
+    </div>
+    <div class="section-title">Zprávy od manažera</div>
+    <div id="briefing-list"><div class="empty-state"><span class="spinner"></span> Načítám...</div></div>
+  </div>
+
+  <!-- KONTAKTY -->
+  <div class="tab" id="tab-contacts">
+    <div class="contact-item"><div><div class="cname">Tomáš Adámek</div><div class="crole">Provoz / Produkce</div></div><a href="tel:731318051">📞 Volat</a></div>
+    <div class="contact-item"><div><div class="cname">Dan Klepl</div><div class="crole">Produkce</div></div><a href="tel:605137719">📞 Volat</a></div>
+    <div class="contact-item"><div><div class="cname">David Jaroš</div><div class="crole">Provoz TODI & Beertruck</div></div><a href="tel:725279073">📞 Volat</a></div>
+    <div class="contact-item"><div><div class="cname">Petar</div><div class="crole">Matchday Catering / Kelímky</div></div><a href="tel:775545566">📞 Volat</a></div>
+    <div class="contact-item"><div><div class="cname">Patrik Proll</div><div class="crole">Elektrikář</div></div><a href="tel:604822787">📞 Volat</a></div>
+    <div class="contact-item"><div><div class="cname">Fanda Straka</div><div class="crole">Security</div></div><a href="tel:733113964">📞 Volat</a></div>
+  </div>
+
+  <!-- CENÍK -->
+  <div class="tab" id="tab-prices">
+    <div class="price-tabs">
+      <div class="price-tab active" onclick="showPriceTab('beertruck',this)">🍺 Beertruck</div>
+      <div class="price-tab" onclick="showPriceTab('todi',this)">🍔 TODI</div>
+    </div>
+    <div id="prices-beertruck">
+      <div class="price-cat">Pípa</div>
+      <div class="price-item"><span class="pname">Prosecco točené</span><span class="psize">0,2l</span><span class="pprice">60 Kč</span></div>
+      <div class="price-item"><span class="pname">Aperol točený</span><span class="psize">0,4l</span><span class="pprice">140 Kč</span></div>
+      <div class="price-item"><span class="pname">Kofola</span><span class="psize">0,5l</span><span class="pprice">55 Kč</span></div>
+      <div class="price-item"><span class="pname">Domácí limo (mango/citronáda/led. čaj)</span><span class="psize">0,4l</span><span class="pprice">75 Kč</span></div>
+      <div class="price-cat">Drinky</div>
+      <div class="price-item"><span class="pname">Cuba libre</span><span class="psize">0,4l</span><span class="pprice">145 Kč</span></div>
+      <div class="price-item"><span class="pname">Skinny bitch</span><span class="psize">0,4l</span><span class="pprice">130 Kč</span></div>
+      <div class="price-item"><span class="pname">Gin & Tonic</span><span class="psize">0,4l</span><span class="pprice">140 Kč</span></div>
+      <div class="price-item"><span class="pname">Mule</span><span class="psize">0,4l</span><span class="pprice">150 Kč</span></div>
+      <div class="price-item"><span class="pname">Pink Lady</span><span class="psize">0,4l</span><span class="pprice">140 Kč</span></div>
+      <div class="price-cat">Víno</div>
+      <div class="price-item"><span class="pname">Chardonnay</span><span class="psize">0,2l</span><span class="pprice">75 Kč</span></div>
+      <div class="price-item"><span class="pname">Primitivo</span><span class="psize">0,2l</span><span class="pprice">90 Kč</span></div>
+      <div class="price-cat">Shots</div>
+      <div class="price-item"><span class="pname">Becherovka</span><span class="psize">0,04l</span><span class="pprice">70 Kč</span></div>
+      <div class="price-item"><span class="pname">Zelená</span><span class="psize">0,04l</span><span class="pprice">60 Kč</span></div>
+      <div class="price-item"><span class="pname">Slivovice / hruška / meruňka</span><span class="psize">0,04l</span><span class="pprice">140 Kč</span></div>
+      <div class="price-item"><span class="pname">Amundsen / Finsbury</span><span class="psize">0,04l</span><span class="pprice">70 Kč</span></div>
+    </div>
+    <div id="prices-todi" style="display:none">
+      <div class="price-cat">Burgery & hlavní jídla</div>
+      <div class="price-item"><span class="pname">Burger Classic</span><span class="psize">1 ks</span><span class="pprice">240 Kč</span></div>
+      <div class="price-item"><span class="pname">Jalapeno burger</span><span class="psize">1 ks</span><span class="pprice">240 Kč</span></div>
+      <div class="price-item"><span class="pname">Blue cheese burger</span><span class="psize">1 ks</span><span class="pprice">240 Kč</span></div>
+      <div class="price-item"><span class="pname">Quesadilla s hovězím & jalapenos</span><span class="psize">1 ks</span><span class="pprice">210 Kč</span></div>
+      <div class="price-item"><span class="pname">Sýrová quesadilla</span><span class="psize">1 ks</span><span class="pprice">140 Kč</span></div>
+      <div class="price-item"><span class="pname">Kuřecí quesadilla</span><span class="psize">1 ks</span><span class="pprice">180 Kč</span></div>
+      <div class="price-item"><span class="pname">Loaded fries (hovězí, sýrový dip, jalapenos)</span><span class="psize">1 ks</span><span class="pprice">195 Kč</span></div>
+      <div class="price-cat">Přílohy</div>
+      <div class="price-item"><span class="pname">Hranolky + dip</span><span class="psize">250g</span><span class="pprice">100 Kč</span></div>
+      <div class="price-item"><span class="pname">Batátové hranolky</span><span class="psize">250g</span><span class="pprice">160 Kč</span></div>
+      <div class="price-cat">Nápoje</div>
+      <div class="price-item"><span class="pname">Coca Cola / Cola Zero</span><span class="psize">1 ks</span><span class="pprice">55 Kč</span></div>
+      <div class="price-item"><span class="pname">Voda Crystaline</span><span class="psize">1 ks</span><span class="pprice">35 Kč</span></div>
+    </div>
+  </div>
+
+  <!-- ADMIN PŘEHLED -->
   <div class="tab" id="tab-admin">
     <div id="admin-content"><div class="empty-state">Načítám přehled...</div></div>
   </div>
 
+  <!-- ADMIN BRIGÁDNÍCI -->
   <div class="tab" id="tab-brigad">
     <div class="card">
       <div class="card-title">Přidat brigádníka</div>
@@ -182,8 +277,11 @@ select option{background:#1e1e32}
 
   <nav id="main-nav">
     <button class="active" onclick="showTab('trzby',this)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Tržby</button>
-    <button onclick="showTab('check',this)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+    <button onclick="showTab('check',this)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Check</button>
     <button onclick="showTab('baleni',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Balení</button>
+    <button onclick="showTab('briefing',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefing</button>
+    <button onclick="showTab('contacts',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Kontakty</button>
+    <button onclick="showTab('prices',this)"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Ceník</button>
     <button onclick="showTab('notif',this)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Hlásit</button>
   </nav>
 </div>
@@ -191,10 +289,16 @@ select option{background:#1e1e32}
 <script>
 var API="https://script.google.com/macros/s/AKfycbyxgEYxH1tVe1unV4UB2lBcNB22AxQVKal9zPS09558t0imWR41hy5ktC2gnVlxxmzoOQ/exec";
 var ADMIN_TOKEN="admin2026";
-var currentUser=null,isAdmin=false,localNotifs=[],localTrzby=[];
+var currentUser=null,isAdmin=false,localNotifs=[],localTrzby=[],packData=[];
 
-var packData=[];
+// ── HELPERS ──────────────────────────────────────────────────
+function fmt(n){return Math.round(n).toLocaleString("cs-CZ")+" Kč";}
+function toast(msg,dur){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(function(){el.classList.remove("show");},dur||2500);}
+function getToken(){return new URLSearchParams(window.location.search).get("token")||"";}
+async function apiGet(p){var r=await fetch(API+"?"+new URLSearchParams(p).toString());return await r.json();}
+async function apiPost(b){var r=await fetch(API,{method:"POST",body:JSON.stringify(b)});return await r.json();}
 
+// ── BALENÍ ───────────────────────────────────────────────────
 function getPackKey(){return"packstate_"+(currentUser?currentUser.stanoviste:"x");}
 function loadPackState(){try{return JSON.parse(localStorage.getItem(getPackKey())||"{}");}catch(e){return{};}}
 function savePackState(s){localStorage.setItem(getPackKey(),JSON.stringify(s));}
@@ -203,34 +307,23 @@ async function loadBaleni(){
   document.getElementById("pack-container").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
   var res=await apiGet({action:"getBaleni",token:currentUser.token});
   if(!res.ok){document.getElementById("pack-container").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
-  packData=res.polozky||[];
-  renderPack();
+  packData=res.polozky||[];renderPack();
 }
 
 function renderPack(){
-  var state=loadPackState();
-  var total=packData.length,done=packData.filter(function(p){return state[p.id];}).length;
+  var state=loadPackState(),total=packData.length,done=packData.filter(function(p){return state[p.id];}).length;
   document.getElementById("pack-progress").style.width=(total?Math.round(done/total*100):0)+"%";
   document.getElementById("pack-count").textContent=done+" / "+total+" položek zabaleno";
-
-  // Seskupit dle sekce
   var sekce={};
   packData.forEach(function(p){if(!sekce[p.sekce])sekce[p.sekce]=[];sekce[p.sekce].push(p);});
-
   var html="";
   Object.keys(sekce).forEach(function(s,si){
-    var items=sekce[s];
-    var secDone=items.filter(function(p){return state[p.id];}).length;
-    var pct=items.length?Math.round(secDone/items.length*100):0;
-    var isOpen=state["__open_"+si]!==false;
-    html+='<div class="pack-section">';
-    html+='<div class="pack-section-header '+(isOpen?"open":"")+'" onclick="toggleSekce('+si+')">';
+    var items=sekce[s],secDone=items.filter(function(p){return state[p.id];}).length,pct=items.length?Math.round(secDone/items.length*100):0,isOpen=state["__open_"+si]!==false;
+    html+='<div class="pack-section"><div class="pack-section-header '+(isOpen?"open":"")+'" onclick="toggleSekce('+si+')">';
     html+='<div><div class="ptitle">'+s+'</div><div class="pack-bar"><div class="pack-bar-fill" style="width:'+pct+'%"></div></div></div>';
-    html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+items.length+'</span><span class="arrow">▼</span></div>';
-    html+='</div><div class="pack-items '+(isOpen?"open":"")+'">';
-    items.forEach(function(p){
-      html+='<div class="pack-item '+(state[p.id]?"done":"")+'"><input type="checkbox" '+(state[p.id]?"checked":"")+' onchange="togglePack(\''+p.id+'\',this.checked)"><span class="item-text">'+p.polozka+'</span></div>';
-    });
+    html+='<div style="display:flex;align-items:center"><span style="font-size:11px;color:rgba(255,255,255,0.4)">'+secDone+'/'+items.length+'</span><span class="arrow">▼</span></div></div>';
+    html+='<div class="pack-items '+(isOpen?"open":"")+'">';
+    items.forEach(function(p){html+='<div class="pack-item '+(state[p.id]?"done":"")+'"><input type="checkbox" '+(state[p.id]?"checked":"")+' onchange="togglePack(\''+p.id+'\',this.checked)"><span class="item-text">'+p.polozka+'</span></div>';});
     html+='</div></div>';
   });
   document.getElementById("pack-container").innerHTML=html||'<div class="empty-state">Žádný seznam</div>';
@@ -240,13 +333,7 @@ function toggleSekce(si){var s=loadPackState();s["__open_"+si]=s["__open_"+si]==
 function togglePack(id,val){var s=loadPackState();s[id]=val;savePackState(s);renderPack();}
 function resetPack(){if(confirm("Resetovat celý seznam balení?")){localStorage.removeItem(getPackKey());renderPack();}}
 
-function logout(){localStorage.removeItem("bf_token");currentUser=null;isAdmin=false;document.getElementById("app-screen").style.display="none";document.getElementById("login-screen").style.display="flex";document.getElementById("login-token").value="";}
-function fmt(n){return Math.round(n).toLocaleString("cs-CZ")+" Kč";}
-function toast(msg,dur){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(function(){el.classList.remove("show");},dur||2500);}
-function getToken(){return new URLSearchParams(window.location.search).get("token")||"";}
-async function apiGet(p){var r=await fetch(API+"?"+new URLSearchParams(p).toString());return await r.json();}
-async function apiPost(b){var r=await fetch(API,{method:"POST",body:JSON.stringify(b)});return await r.json();}
-
+// ── LOGIN ────────────────────────────────────────────────────
 async function doLogin(){
   var token=document.getElementById("login-token").value.trim();
   if(!token){toast("Zadej přístupový kód");return;}
@@ -259,24 +346,33 @@ async function doLogin(){
   else toast("❌ Neplatný přístupový kód");
 }
 
+function logout(){localStorage.removeItem("bf_token");currentUser=null;isAdmin=false;document.getElementById("app-screen").style.display="none";document.getElementById("login-screen").style.display="flex";document.getElementById("login-token").value="";}
+
 function showApp(){
   document.getElementById("login-screen").style.display="none";
   document.getElementById("app-screen").style.display="block";
   document.getElementById("header-title").textContent="🍺 "+currentUser.jmeno;
   document.getElementById("header-sub").textContent=isAdmin?"Manažerský přehled":"Stanoviště: "+currentUser.stanoviste;
   if(isAdmin){
+    document.getElementById("admin-briefing-form").style.display="block";
     document.getElementById("main-nav").innerHTML=
       '<button class="active" onclick="showTab(\'admin\',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Přehled</button>'+
-      '<button onclick="showTab(\'baleni\',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Balení</button>'+
+      '<button onclick="showTab(\'briefing\',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefing</button>'+
+      '<button onclick="showTab(\'contacts\',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Kontakty</button>'+
+      '<button onclick="showTab(\'prices\',this)"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Ceník</button>'+
       '<button onclick="showTab(\'brigad\',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Brigádníci</button>';
     document.getElementById("tab-trzby").classList.remove("active");
     document.getElementById("tab-admin").classList.add("active");
     loadAdminData();
-  } else {loadTrzby();loadChecklist();}
+  } else {
+    loadTrzby();loadChecklist();
+  }
+  loadBriefing();
 }
 
 window.addEventListener("load",function(){var t=getToken()||localStorage.getItem("bf_token");if(t){document.getElementById("login-token").value=t;doLogin();}});
 
+// ── TRŽBY ────────────────────────────────────────────────────
 async function loadTrzby(){var res=await apiGet({action:"getTrzby",token:currentUser.token});if(!res.ok)return;localTrzby=res.zaznamy||[];renderTrzby();}
 function renderTrzby(){
   var cash=0,card=0;localTrzby.forEach(function(t){cash+=t.hotovost||0;card+=t.karta||0;});
@@ -288,8 +384,7 @@ function renderTrzby(){
   el.innerHTML=[...localTrzby].reverse().map(function(t){return'<div class="entry"><div><div class="name">'+(t.cas||"")+'</div><div class="sub">Hotovost: '+fmt(t.hotovost||0)+' · Karta: '+fmt(t.karta||0)+'</div></div><span class="amount">'+fmt((t.hotovost||0)+(t.karta||0))+'</span></div>';}).join("");
 }
 async function saveTrzba(){
-  var cash=parseFloat(document.getElementById("t-cash").value)||0;
-  var card=parseFloat(document.getElementById("t-card").value)||0;
+  var cash=parseFloat(document.getElementById("t-cash").value)||0,card=parseFloat(document.getElementById("t-card").value)||0;
   if(!cash&&!card){toast("Zadej alespoň jednu částku");return;}
   var btn=document.querySelector('#tab-trzby .btn');btn.innerHTML='<span class="spinner"></span>Ukládám...';btn.disabled=true;
   var res=await apiPost({action:"saveTrzby",token:currentUser.token,hotovost:cash,karta:card});
@@ -298,6 +393,7 @@ async function saveTrzba(){
   else toast("❌ Chyba: "+(res.error||"zkus znovu"));
 }
 
+// ── CHECKLIST ────────────────────────────────────────────────
 async function loadChecklist(){
   var res=await apiGet({action:"getChecklist",token:currentUser.token});
   if(!res.ok){document.getElementById("checklist-container").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
@@ -311,18 +407,18 @@ function renderChecklist(polozky){
   var html="";
   Object.keys(faze).forEach(function(f){
     html+='<div class="check-phase">'+f+'</div><div class="card" style="padding:8px 14px">';
-    faze[f].forEach(function(p){html+='<div class="check-item '+(p.hotovo?"done":"")+'"><input type="checkbox" '+(p.hotovo?"checked":"") +' onchange="toggleCheck(\''+p.id+'\',this.checked)"><span class="item-text">'+p.ukol+'</span></div>';});
+    faze[f].forEach(function(p){html+='<div class="check-item '+(p.hotovo?"done":"")+'"><input type="checkbox" '+(p.hotovo?"checked":"")+' onchange="toggleCheck(\''+p.id+'\',this.checked)"><span class="item-text">'+p.ukol+'</span></div>';});
     html+='</div>';
   });
   document.getElementById("checklist-container").innerHTML=html||'<div class="empty-state">Žádné položky</div>';
 }
 async function toggleCheck(id,val){await apiPost({action:"saveChecklist",token:currentUser.token,id:id,hotovo:val});loadChecklist();}
 
+// ── NOTIFIKACE ───────────────────────────────────────────────
 async function sendNotif(typ){
   var text=document.getElementById("notif-text").value.trim();
   if(!text){toast("Napiš zprávu");return;}
-  var btns=document.querySelectorAll('#tab-notif .btn-warn, #tab-notif .btn-red');
-  btns.forEach(function(b){b.disabled=true;});
+  var btns=document.querySelectorAll('#tab-notif .btn-warn,#tab-notif .btn-red');btns.forEach(function(b){b.disabled=true;});
   var res=await apiPost({action:"sendNotifikace",token:currentUser.token,typ:typ,zprava:text});
   btns.forEach(function(b){b.disabled=false;});
   if(res.ok){toast("✅ Zpráva odeslána");localNotifs.unshift({cas:new Date().toLocaleString("cs-CZ"),typ:typ,zprava:text});document.getElementById("notif-text").value="";renderNotifs();}
@@ -334,6 +430,44 @@ function renderNotifs(){
   el.innerHTML=localNotifs.map(function(n){return'<div class="notif-card '+n.typ+'"><div class="notif-head">'+(n.typ==="zasoby"?"⚠️ Zásoby":"🚨 Problém")+' · '+n.cas+'</div><div class="notif-text">'+n.zprava+'</div></div>';}).join("");
 }
 
+// ── BRIEFING ─────────────────────────────────────────────────
+var localBriefing=[];
+async function loadBriefing(){
+  var res=await apiGet({action:"getBriefing",token:currentUser.token});
+  if(!res.ok)return;
+  localBriefing=res.zpravy||[];
+  renderBriefing();
+}
+function renderBriefing(){
+  var lastSeen=parseInt(localStorage.getItem("bf_briefing_seen")||"0");
+  var el=document.getElementById("briefing-list");
+  if(!localBriefing.length){el.innerHTML='<div class="empty-state">Žádné zprávy od manažera</div>';return;}
+  el.innerHTML=localBriefing.map(function(b){
+    var isNew=parseInt(b.ts||0)>lastSeen;
+    return'<div class="briefing-card '+(isNew?"new-msg":"")+'">'+(isNew?'<div class="new-badge">NOVÁ ZPRÁVA</div><br>':'')+'<div class="btime">'+b.cas+'</div><div class="btext">'+b.text.replace(/\n/g,"<br>")+'</div></div>';
+  }).join("");
+  // Označ jako přečtené
+  if(localBriefing.length) localStorage.setItem("bf_briefing_seen",localBriefing[0].ts||Date.now());
+}
+async function sendBriefing(){
+  var text=document.getElementById("briefing-input").value.trim();
+  if(!text){toast("Napiš zprávu");return;}
+  var btn=document.querySelector('#tab-briefing .btn');btn.innerHTML='<span class="spinner"></span>Odesílám...';btn.disabled=true;
+  var res=await apiPost({action:"saveBriefing",token:ADMIN_TOKEN,text:text});
+  btn.innerHTML="Odeslat zprávu týmu";btn.disabled=false;
+  if(res.ok){toast("✅ Zpráva odeslána všem");document.getElementById("briefing-input").value="";loadBriefing();}
+  else toast("❌ Chyba: "+(res.error||"zkus znovu"));
+}
+
+// ── CENÍK ────────────────────────────────────────────────────
+function showPriceTab(tab,btn){
+  document.getElementById("prices-beertruck").style.display=tab==="beertruck"?"block":"none";
+  document.getElementById("prices-todi").style.display=tab==="todi"?"block":"none";
+  document.querySelectorAll(".price-tab").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+}
+
+// ── ADMIN ────────────────────────────────────────────────────
 async function loadAdminData(){
   document.getElementById("admin-content").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
   var res=await apiGet({action:"getVsechnaData",token:ADMIN_TOKEN});
@@ -344,13 +478,13 @@ async function loadAdminData(){
   var notifikace=(notifRes.notifikace||[]).filter(function(n){return n.stav==="NOVÁ";});
   var notifHtml="";
   if(notifikace.length){notifHtml='<div class="section-title">🔔 Nové notifikace ('+notifikace.length+')</div>';notifHtml+=notifikace.reverse().map(function(n){return'<div class="notif-card '+n.typ+'"><div class="notif-head">'+n.jmeno+' · '+n.stanoviste+' · '+n.cas+'</div><div class="notif-text">'+n.zprava+'</div></div>';}).join("");}
-  var stanHtml=Object.entries(trzby).map(function(e){var stan=e[0],d=e[1],total=(d.hotovost||0)+(d.karta||0);var pctCash=total?Math.round((d.hotovost||0)/total*100):0;var pctCard=total?Math.round((d.karta||0)/total*100):0;return'<div class="stan-row"><div class="stan-name">'+stan+' <span style="font-weight:400;color:#f4a623;font-size:13px">– '+fmt(total)+'</span></div><div class="stan-bars"><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Hotovost</span><span>'+fmt(d.hotovost||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill cash" style="width:'+pctCash+'%"></div></div></div><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Karta</span><span>'+fmt(d.karta||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill card" style="width:'+pctCard+'%"></div></div></div></div></div>';}).join("")||'<div class="empty-state">Zatím žádné tržby</div>';
+  var stanHtml=Object.entries(trzby).map(function(e){var stan=e[0],d=e[1],total=(d.hotovost||0)+(d.karta||0),pctCash=total?Math.round((d.hotovost||0)/total*100):0,pctCard=total?Math.round((d.karta||0)/total*100):0;return'<div class="stan-row"><div class="stan-name">'+stan+' <span style="font-weight:400;color:#f4a623;font-size:13px">– '+fmt(total)+'</span></div><div class="stan-bars"><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Hotovost</span><span>'+fmt(d.hotovost||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill cash" style="width:'+pctCash+'%"></div></div></div><div class="stan-bar-wrap"><div class="stan-bar-label"><span>Karta</span><span>'+fmt(d.karta||0)+'</span></div><div class="stan-bar-bg"><div class="stan-bar-fill card" style="width:'+pctCard+'%"></div></div></div></div></div>';}).join("")||'<div class="empty-state">Zatím žádné tržby</div>';
   document.getElementById("admin-content").innerHTML='<div class="sum-card"><div class="label">Celkové tržby</div><div class="value">'+fmt(totalCash+totalCard)+'</div></div><div class="admin-grid"><div class="admin-card"><div class="label">Hotovost</div><div class="value">'+fmt(totalCash)+'</div></div><div class="admin-card"><div class="label">Karta</div><div class="value">'+fmt(totalCard)+'</div></div></div>'+notifHtml+'<div class="section-title">Tržby dle stanovišť</div>'+stanHtml+'<button class="btn btn-ghost" style="margin-top:12px" onclick="loadAdminData()">↺ Obnovit</button>';
 }
 
+// ── BRIGÁDNÍCI ───────────────────────────────────────────────
 async function addBrigadnik(){
-  var jmeno=document.getElementById("b-jmeno").value.trim();
-  var stanoviste=document.getElementById("b-stanoviste").value.trim();
+  var jmeno=document.getElementById("b-jmeno").value.trim(),stanoviste=document.getElementById("b-stanoviste").value.trim();
   if(!jmeno||!stanoviste){toast("Vyplň jméno i stanoviště");return;}
   var btn=document.querySelector('#tab-brigad .btn');btn.innerHTML='<span class="spinner"></span>Přidávám...';btn.disabled=true;
   var res=await apiPost({action:"addBrigadnik",adminToken:ADMIN_TOKEN,jmeno:jmeno,stanoviste:stanoviste});
@@ -365,6 +499,7 @@ function renderBrigadnikLink(b){
 }
 function copyLink(link){navigator.clipboard.writeText(link).then(function(){toast("✅ Odkaz zkopírován");});}
 
+// ── NAVIGACE ─────────────────────────────────────────────────
 function showTab(name,btn){
   document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});
   document.querySelectorAll("nav button").forEach(function(b){b.classList.remove("active");});
@@ -372,6 +507,7 @@ function showTab(name,btn){
   btn.classList.add("active");
   if(name==="admin")loadAdminData();
   if(name==="baleni")loadBaleni();
+  if(name==="briefing")loadBriefing();
 }
 </script>
 </body>
