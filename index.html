@@ -149,7 +149,11 @@ select option{background:#1e1e32}
         <div class="field"><label>Hotovost (Kč)</label><input type="number" id="t-cash" placeholder="0" inputmode="numeric"></div>
         <div class="field"><label>Karta (Kč)</label><input type="number" id="t-card" placeholder="0" inputmode="numeric"></div>
       </div>
-      <button class="btn" onclick="saveTrzba()">Uložit tržbu</button>
+      <div class="row">
+        <div class="field"><label>Dýška (Kč)</label><input type="number" id="t-dyska" placeholder="0" inputmode="numeric"></div>
+        <div class="field" style="display:flex;align-items:flex-end"><p style="font-size:11px;color:rgba(255,255,255,0.4);padding-bottom:10px">Zadej na konci směny</p></div>
+      </div>
+      <button class="btn" onclick="saveTrzba()">Uložit tržbu & dýška</button>
     </div>
     <div class="section-title">Historie</div>
     <div id="trzby-list"><div class="empty-state">Zatím žádné záznamy</div></div>
@@ -275,6 +279,25 @@ select option{background:#1e1e32}
     <div id="brigad-list"><div class="empty-state">Zatím nikdo přidán</div></div>
   </div>
 
+  <!-- DOCHÁZKA -->
+  <div class="tab" id="tab-dochazka">
+    <div class="sum-card" style="background:linear-gradient(135deg,#2d6a4f,#1e3a2f)">
+      <div class="label">Celkem odpracováno</div>
+      <div class="value" id="doc-total-hodiny">0 hod</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Zadat docházku</div>
+      <div class="row">
+        <div class="field"><label>Příchod</label><input type="time" id="doc-prichod" value="10:30"></div>
+        <div class="field"><label>Odchod</label><input type="time" id="doc-odchod" value="22:00"></div>
+      </div>
+      <div id="doc-preview" style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:10px;text-align:center"></div>
+      <button class="btn" onclick="saveDocházka()">Uložit docházku</button>
+    </div>
+    <div class="section-title">Historie</div>
+    <div id="doc-list"><div class="empty-state">Načítám...</div></div>
+  </div>
+
   <nav id="main-nav">
     <button class="active" onclick="showTab('trzby',this)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Tržby</button>
     <button onclick="showTab('check',this)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Check</button>
@@ -282,7 +305,7 @@ select option{background:#1e1e32}
     <button onclick="showTab('briefing',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefing</button>
     <button onclick="showTab('contacts',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Kontakty</button>
     <button onclick="showTab('prices',this)"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Ceník</button>
-    <button onclick="showTab('notif',this)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Hlásit</button>
+    <button onclick="showTab('dochazka',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Směna</button><button onclick="showTab('notif',this)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Hlásit</button>
   </nav>
 </div>
 
@@ -384,12 +407,12 @@ function renderTrzby(){
   el.innerHTML=[...localTrzby].reverse().map(function(t){return'<div class="entry"><div><div class="name">'+(t.cas||"")+'</div><div class="sub">Hotovost: '+fmt(t.hotovost||0)+' · Karta: '+fmt(t.karta||0)+'</div></div><span class="amount">'+fmt((t.hotovost||0)+(t.karta||0))+'</span></div>';}).join("");
 }
 async function saveTrzba(){
-  var cash=parseFloat(document.getElementById("t-cash").value)||0,card=parseFloat(document.getElementById("t-card").value)||0;
+  var cash=parseFloat(document.getElementById("t-cash").value)||0,card=parseFloat(document.getElementById("t-card").value)||0,dyska=parseFloat(document.getElementById("t-dyska").value)||0;
   if(!cash&&!card){toast("Zadej alespoň jednu částku");return;}
   var btn=document.querySelector('#tab-trzby .btn');btn.innerHTML='<span class="spinner"></span>Ukládám...';btn.disabled=true;
-  var res=await apiPost({action:"saveTrzby",token:currentUser.token,hotovost:cash,karta:card});
-  btn.innerHTML="Uložit tržbu";btn.disabled=false;
-  if(res.ok){toast("✅ Tržba uložena");document.getElementById("t-cash").value="";document.getElementById("t-card").value="";localTrzby.push({cas:new Date().toLocaleString("cs-CZ"),hotovost:cash,karta:card});renderTrzby();}
+  var res=await apiPost({action:"saveTrzby",token:currentUser.token,hotovost:cash,karta:card,dyska:dyska});
+  btn.innerHTML="Uložit tržbu & dýška";btn.disabled=false;
+  if(res.ok){toast("✅ Uloženo");document.getElementById("t-cash").value="";document.getElementById("t-card").value="";document.getElementById("t-dyska").value="";localTrzby.push({cas:new Date().toLocaleString("cs-CZ"),hotovost:cash,karta:card,dyska:dyska});renderTrzby();}
   else toast("❌ Chyba: "+(res.error||"zkus znovu"));
 }
 
@@ -499,6 +522,59 @@ function renderBrigadnikLink(b){
 }
 function copyLink(link){navigator.clipboard.writeText(link).then(function(){toast("✅ Odkaz zkopírován");});}
 
+
+// ── DOCHÁZKA ─────────────────────────────────────────────────
+var localDocházka=[];
+
+async function loadDocházka(){
+  document.getElementById("doc-list").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
+  var res=await apiGet({action:"getDocčázka",token:currentUser.token});
+  if(!res.ok){document.getElementById("doc-list").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
+  localDocházka=res.zaznamy||[];
+  renderDocházka();
+}
+
+function renderDocházka(){
+  var total=0;localDocházka.forEach(function(d){total+=parseFloat(d.hodiny)||0;});
+  document.getElementById("doc-total-hodiny").textContent=total.toFixed(1)+" hod";
+  var el=document.getElementById("doc-list");
+  if(!localDocházka.length){el.innerHTML='<div class="empty-state">Zatím žádné záznamy</div>';return;}
+  el.innerHTML=localDocházka.map(function(d){
+    return'<div class="entry"><div><div class="name">'+d.datum+'</div><div class="sub">'+d.prichod+' → '+d.odchod+'</div></div><span class="amount">'+parseFloat(d.hodiny||0).toFixed(1)+' hod</span></div>';
+  }).join("");
+}
+
+async function saveDocházka(){
+  var prichod=document.getElementById("doc-prichod").value,odchod=document.getElementById("doc-odchod").value;
+  if(!prichod||!odchod){toast("Zadej příchod i odchod");return;}
+  var p=prichod.split(":"),o=odchod.split(":");
+  var hodiny=Math.round(((parseInt(o[0])*60+parseInt(o[1]))-(parseInt(p[0])*60+parseInt(p[1])))/60*10)/10;
+  if(hodiny<=0){toast("Odchod musí být po příchodu");return;}
+  document.getElementById("doc-preview").textContent="= "+hodiny.toFixed(1)+" hodin";
+  var btn=document.querySelector('#tab-dochazka .btn');btn.innerHTML='<span class="spinner"></span>Ukládám...';btn.disabled=true;
+  var res=await apiPost({action:"saveDocčázka",token:currentUser.token,prichod:prichod,odchod:odchod});
+  btn.innerHTML="Uložit docházku";btn.disabled=false;
+  if(res.ok){toast("✅ Docházka uložena ("+res.hodiny+" hod)");localDocházka.unshift({prichod:prichod,odchod:odchod,hodiny:res.hodiny,datum:new Date().toLocaleDateString("cs-CZ")});renderDocházka();}
+  else toast("❌ Chyba: "+(res.error||"zkus znovu"));
+}
+
+// Živý náhled hodin
+document.addEventListener("DOMContentLoaded",function(){
+  function updatePreview(){
+    var p=document.getElementById("doc-prichod"),o=document.getElementById("doc-odchod");
+    if(!p||!o||!p.value||!o.value)return;
+    var pa=p.value.split(":"),oa=o.value.split(":");
+    var h=Math.round(((parseInt(oa[0])*60+parseInt(oa[1]))-(parseInt(pa[0])*60+parseInt(pa[1])))/60*10)/10;
+    var prev=document.getElementById("doc-preview");
+    if(prev)prev.textContent=h>0?"= "+h.toFixed(1)+" hodin":"⚠️ Zkontroluj časy";
+  }
+  setInterval(function(){
+    var p=document.getElementById("doc-prichod"),o=document.getElementById("doc-odchod");
+    if(p)p.addEventListener("change",updatePreview);
+    if(o)o.addEventListener("change",updatePreview);
+  },1000);
+});
+
 // ── NAVIGACE ─────────────────────────────────────────────────
 function showTab(name,btn){
   document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});
@@ -508,6 +584,7 @@ function showTab(name,btn){
   if(name==="admin")loadAdminData();
   if(name==="baleni")loadBaleni();
   if(name==="briefing")loadBriefing();
+  if(name==="dochazka")loadDocházka();
 }
 </script>
 </body>
