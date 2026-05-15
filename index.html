@@ -386,7 +386,7 @@ function showApp(){
       '<button onclick="showTab(\'brigad\',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Brigádníci</button>';
     document.getElementById("tab-trzby").classList.remove("active");
     document.getElementById("tab-admin").classList.add("active");
-    loadAdminData();
+    loadAdminData();loadBrigadnici();
   } else {
     loadTrzby();loadChecklist();
   }
@@ -516,9 +516,26 @@ async function addBrigadnik(){
   else toast("❌ "+(res.error||"Chyba"));
 }
 var brigListData=[];
+
+async function loadBrigadnici(){
+  var res=await apiGet({action:"getBrigadnici",token:ADMIN_TOKEN});
+  if(!res.ok)return;
+  brigListData=res.brigadnici||[];
+  renderBrigadList();
+}
+
+function renderBrigadList(){
+  var el=document.getElementById("brigad-list");
+  if(!brigListData.length){el.innerHTML='<div class="empty-state">Zatím nikdo přidán</div>';return;}
+  el.innerHTML=brigListData.map(function(b){
+    var link=window.location.origin+window.location.pathname+"?token="+b.token;
+    return'<div class="entry" style="flex-direction:column;align-items:flex-start;gap:6px"><div style="display:flex;justify-content:space-between;width:100%"><div><div class="name">'+b.jmeno+'</div><div class="sub">'+b.stanoviste+'</div></div><button class="btn btn-ghost btn-sm" onclick="copyLink(\''+link+'\')">📋 Kopírovat</button></div><div style="font-size:11px;color:rgba(255,255,255,0.35);word-break:break-all">'+link+'</div></div>';
+  }).join("");
+}
+
 function renderBrigadnikLink(b){
   brigListData.unshift(b);
-  document.getElementById("brigad-list").innerHTML=brigListData.map(function(b){var link=window.location.origin+window.location.pathname+"?token="+b.token;return'<div class="entry" style="flex-direction:column;align-items:flex-start;gap:6px"><div style="display:flex;justify-content:space-between;width:100%"><div><div class="name">'+b.jmeno+'</div><div class="sub">'+b.stanoviste+'</div></div><button class="btn btn-ghost btn-sm" onclick="copyLink(\''+link+'\')">📋 Kopírovat</button></div><div style="font-size:11px;color:rgba(255,255,255,0.35);word-break:break-all">'+link+'</div></div>';}).join("");
+  renderBrigadList();
 }
 function copyLink(link){navigator.clipboard.writeText(link).then(function(){toast("✅ Odkaz zkopírován");});}
 
@@ -528,7 +545,7 @@ var localDocházka=[];
 
 async function loadDocházka(){
   document.getElementById("doc-list").innerHTML='<div class="empty-state"><span class="spinner"></span> Načítám...</div>';
-  var res=await apiGet({action:"getDocčázka",token:currentUser.token});
+  var res=await apiGet({action:"getDochazka",token:currentUser.token});
   if(!res.ok){document.getElementById("doc-list").innerHTML='<div class="empty-state">Nepodařilo se načíst</div>';return;}
   localDocházka=res.zaznamy||[];
   renderDocházka();
@@ -552,7 +569,7 @@ async function saveDocházka(){
   if(hodiny<=0){toast("Odchod musí být po příchodu");return;}
   document.getElementById("doc-preview").textContent="= "+hodiny.toFixed(1)+" hodin";
   var btn=document.querySelector('#tab-dochazka .btn');btn.innerHTML='<span class="spinner"></span>Ukládám...';btn.disabled=true;
-  var res=await apiPost({action:"saveDocčázka",token:currentUser.token,prichod:prichod,odchod:odchod});
+  var res=await apiPost({action:"saveDochazka",token:currentUser.token,prichod:prichod,odchod:odchod});
   btn.innerHTML="Uložit docházku";btn.disabled=false;
   if(res.ok){toast("✅ Docházka uložena ("+res.hodiny+" hod)");localDocházka.unshift({prichod:prichod,odchod:odchod,hodiny:res.hodiny,datum:new Date().toLocaleDateString("cs-CZ")});renderDocházka();}
   else toast("❌ Chyba: "+(res.error||"zkus znovu"));
@@ -585,6 +602,7 @@ function showTab(name,btn){
   if(name==="baleni")loadBaleni();
   if(name==="briefing")loadBriefing();
   if(name==="dochazka")loadDocházka();
+  if(name==="brigad")loadBrigadnici();
 }
 </script>
 </body>
