@@ -393,7 +393,27 @@ function showApp(){
   loadBriefing();
 }
 
-window.addEventListener("load",function(){var t=getToken()||localStorage.getItem("bf_token");if(t){document.getElementById("login-token").value=t;doLogin();}});
+window.addEventListener("load",function(){
+  var urlToken=getToken();
+  if(urlToken){
+    // Token v URL = brigádník s přímým odkazem → přihlásit okamžitě
+    document.getElementById("login-token").value=urlToken;
+    doLogin();
+  } else {
+    var saved=localStorage.getItem("bf_token");
+    if(saved){
+      // Uložený token → předvyplnit ale nepřihlašovat automaticky
+      document.getElementById("login-token").value=saved;
+      // Zobraz tlačítko pro rychlé přihlášení
+      var hint=document.createElement("p");
+      hint.id="autologin-hint";
+      hint.style.cssText="text-align:center;font-size:12px;color:rgba(255,255,255,0.4);margin-top:10px;cursor:pointer";
+      hint.textContent="Přihlásit se jako naposledy? Klepni zde";
+      hint.onclick=function(){doLogin();};
+      document.getElementById("login-btn").parentNode.appendChild(hint);
+    }
+  }
+});
 
 // ── TRŽBY ────────────────────────────────────────────────────
 async function loadTrzby(){var res=await apiGet({action:"getTrzby",token:currentUser.token});if(!res.ok)return;localTrzby=res.zaznamy||[];renderTrzby();}
